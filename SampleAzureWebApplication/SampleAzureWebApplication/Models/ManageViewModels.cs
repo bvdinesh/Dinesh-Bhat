@@ -2,9 +2,24 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
+using Microsoft.WindowsAzure.Storage.Table;
 
 namespace SampleAzureWebApplication.Models
 {
+    public class CustomerEntity : TableEntity
+    {
+        public CustomerEntity(string lastName, string firstName)
+        {
+            this.PartitionKey = lastName;
+            this.RowKey = firstName;
+        }
+
+        public CustomerEntity() { }
+
+        public string Email { get; set; }
+
+        public string PhoneNumber { get; set; }
+    }
     public class IndexViewModel
     {
         public bool HasPassword { get; set; }
